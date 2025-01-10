@@ -23,7 +23,8 @@
 }
 
 .web-heading span:nth-child(2) {
-  font-size: 0.5em;
+  font-size: 1em;
+  letter-spacing: 0.2rem;
 }
 
 .header-nav {
@@ -51,13 +52,6 @@
   background-color: darkgrey;
   border-radius: 5px;
   color: white;
-}
-
-.btn-redirect {
-  display: block;
-  color: white;
-  text-shadow: 1px 1px 1px black;
-  font-size: 1.1rem;
 }
 
 @media screen and (min-width: 700px) {
