@@ -1,10 +1,12 @@
 // DEPENDENCIES
-// COMPONENTS
-// STYLES
 import { MdMenu } from "react-icons/md";
-import "../assets/styles/component_styles/layouts.css";
 import { useState } from "react";
 import { Outlet } from "react-router";
+
+// COMPONENTS
+
+// STYLES
+import "../assets/styles/component_styles/layouts.css";
 
 const Layouts = () => {
   const [isShowNav, setIsShowNav] = useState(false);
@@ -16,7 +18,7 @@ const Layouts = () => {
       <header className="header flex relative">
         <h1 className="web-heading flex">
           <span>Nesting</span>
-          <span>v.1.0</span>
+          <span>V.1.0</span>
         </h1>
         <button type="button" onClick={handleShowNav} className="btn-menu flex absolute">
           <MdMenu />

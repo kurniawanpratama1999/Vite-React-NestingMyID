@@ -1,0 +1,46 @@
+.card {
+  width: 200px;
+
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 5px;
+  overflow: hidden;
+
+  text-align: left;
+}
+
+.card .wrapper {
+    height: 100px;
+    padding-top: 1rem;
+}
+
+.card .icon {
+  padding: 0 1rem;
+  height: 5.5rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom: 1px solid hsl(0, 0%, 80%);
+}
+
+.card:nth-of-type(1) .icon {
+  background-color: hsl(226, 100%, 66%);
+}
+.card:nth-of-type(2) .icon {
+  background-color: hsl(130, 46%, 48%);
+}
+.card:nth-of-type(3) .icon {
+  background-color: rgb(240, 162, 37);
+}
+
+.card .wrapper .title {
+  padding: 0 1rem;
+  font-size: 1rem;
+}
+
+.card .wrapper .description {
+  padding: 0 1rem;
+  padding-bottom: 1rem;
+  font-size: 0.8rem;
+}
