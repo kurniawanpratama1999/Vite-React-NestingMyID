@@ -59,7 +59,10 @@ const Layouts = () => {
                 <List
                   label={value.label}
                   className={pathname.includes(value.label) ? "highlight-list" : "normal"}
-                  onClick={() => navigate(`/${value.label}`)}
+                  onClick={() => {
+                    navigate(`/${value.label}`);
+                    setIsShowNav(false);
+                  }}
                 />
               )
           )}
