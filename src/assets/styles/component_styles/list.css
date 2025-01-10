@@ -1,0 +1,14 @@
+.btn-list {
+  display: block;
+  text-shadow: 1px 1px 1px black;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+
+.normal {
+  color: white;
+}
+
+.highlight-list {
+  color: yellowgreen;
+}
