@@ -1,0 +1,79 @@
+:root {
+  --PHONE: 450px;
+  --TABLET: 700px;
+  --DEKSTOP: 900px;
+}
+
+*,
+*::after,
+*::before {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.flex {
+  display: flex;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
+}
+
+.grid {
+  display: grid;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.static {
+  position: static;
+}
+
+.sticky {
+  position: sticky;
+}
+
+.hidden {
+  display: none;
+}
+
+.translate-center-xy {
+  transform: translate(50%, 50%);
+}
+
+.translate-center-x {
+  transform: translateX(50%);
+}
+
+.translate-center-y {
+  transform: translateY(50%);
+}
+
+button {
+  appearance: unset;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* 
+CATATAN MEDIA QUERY:
+  --PHONE: 450px;
+  --TABLET: 700px;
+  --DEKSTOP: 900px;
+*/
