@@ -10,6 +10,7 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+  font-weight: 500;
 }
 
 .flex {
@@ -77,6 +78,51 @@ button {
   background: transparent;
   border: none;
   cursor: pointer;
+  color: inherit;
+  font-weight: 500;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 16px;
+}
+
+.jc-center {
+  justify-content: center;
+}
+.jc-start {
+  justify-content: start;
+}
+.jc-end {
+  justify-content: end;
+}
+.jc-around {
+  justify-content: space-around;
+}
+.jc-between {
+  justify-content: space-between;
+}
+.jc-evenly {
+  justify-content: space-evenly;
+}
+
+.ai-center {
+  align-items: center;
+}
+.ai-start {
+  align-items: start;
+}
+.ai-end {
+  align-items: end;
 }
 
 /* 
