@@ -1,0 +1,15 @@
+form {
+  gap: 12px;
+  padding: 3rem;
+  background-color: hsl(0, 0%, 15%);
+  border-radius: 10px;
+}
+
+form .message {
+    top: -30px;
+    width: 100%;
+    font-size: 12px;
+    letter-spacing: .1rem;
+    word-spacing: 2px;
+    font-style: italic;
+}
