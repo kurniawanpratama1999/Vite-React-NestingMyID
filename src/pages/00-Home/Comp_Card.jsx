@@ -1,7 +1,5 @@
 import { BiLinkAlt, BiPlus, BiUser } from "react-icons/bi";
 
-import "../../assets/styles/page_styles/01-Home/comp_card.css";
-
 const Comp_Card = ({ iconType = 1, title = "varchar", children }) => {
   return (
     <article className="card">
