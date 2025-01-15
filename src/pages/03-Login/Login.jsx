@@ -4,10 +4,12 @@ import Button from "../../components/Button";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 
+import '../../assets/styles/page_styles/03-Login/login.css'
+
 const Login = () => {
   return (
     <Container className="flex jc-center ai-center relative">
-      <Form id="form-register">
+      <Form id="form-login">
         <Input type="text" htmlFor="username" classLabel="focus-green">
           <h3>Username or Email</h3>
         </Input>
