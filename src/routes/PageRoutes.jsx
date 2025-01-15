@@ -10,7 +10,7 @@ import ChangeName from "../pages/05.01-ChangeName-verify/ChangeName";
 import ChangeUsername from "../pages/05.02-ChangeUsername-verify/ChangeUsername";
 import ChangeEmail from "../pages/05.03-ChangeEmail-verify/ChangeEmail";
 import ChangePassword from "../pages/05.04-ChangePassword-verify/ChangePassword";
-import RequsetActivation from "../pages/05.05-RequestActivation-auth/RequsetActivation";
+import RequsetActivation from "../pages/05.05-RequestActivation-auth/RequestActivation";
 import CreateAndUpdate from "../pages/06-CreateAndUpdate-auth-verify/CreateAndUpdate";
 import Collection from "../pages/07-Collection-auth/Collection";
 import UrlCollection from "../pages/08-UrlCollection-auth-verify/UrlCollection";
