@@ -5,22 +5,26 @@ label {
   overflow: hidden;
 }
 
-label.focus-green:has(input:focus) {
+label.focus-green:has(input:focus),
+label.focus-green:has(textarea:focus) {
   border-color: lightgreen;
   border-width: 1.5px;
 }
 
-label.focus-green:has(input:focus) h3 {
+label.focus-green:has(input:focus) h3,
+label.focus-green:has(textarea:focus) h3 {
   color: lightgreen;
   font-weight: 600;
 }
 
-label.focus-blue:has(input:focus) {
+label.focus-blue:has(input:focus),
+label.focus-blue:has(textarea:focus) {
   border-color: rgb(97, 97, 255);
   border-width: 1.5px;
 }
 
-label.focus-blue:has(input:focus) h3 {
+label.focus-blue:has(input:focus) h3,
+label.focus-blue:has(textarea:focus) h3 {
   color: rgb(97, 97, 255);
   font-weight: 600;
 }
