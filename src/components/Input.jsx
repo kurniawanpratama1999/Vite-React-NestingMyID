@@ -25,18 +25,19 @@ const Input = ({
           {children}
         </>
       ) : element === "textarea" ? (
-        <textarea
-          style={{ resize: "none" }}
-          type={type}
-          id={htmlFor}
-          className={`input ${classInput}`}
-          name={htmlFor}
-          spellCheck="false"
-          autoComplete="off"
-          {...props}
-        >
+        <>
+          <textarea
+            style={{ resize: "none" }}
+            type={type}
+            id={htmlFor}
+            className={`input ${classInput}`}
+            name={htmlFor}
+            spellCheck="false"
+            autoComplete="off"
+            {...props}
+          />
           {children}
-        </textarea>
+        </>
       ) : (
         <>
           <input
