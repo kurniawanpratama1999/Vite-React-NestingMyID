@@ -53,6 +53,10 @@
   position: static;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .sticky {
   position: sticky;
 }
@@ -61,16 +65,16 @@
   display: none;
 }
 
-.translate-center-xy {
-  transform: translate(50%, 50%);
+.tl-center-xy {
+  transform: translate(-50%, -50%);
 }
 
-.translate-center-x {
-  transform: translateX(50%);
+.tl-center-x {
+  transform: translateX(-50%);
 }
 
-.translate-center-y {
-  transform: translateY(50%);
+.tl-center-y {
+  transform: translateY(-50%);
 }
 
 button {
@@ -124,6 +128,7 @@ h6 {
 .ai-end {
   align-items: end;
 }
+
 
 /* 
 CATATAN MEDIA QUERY:
