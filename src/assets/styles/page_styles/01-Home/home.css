@@ -1,14 +1,13 @@
-.container {
+#home.container {
   text-align: center;
   padding: 2rem 10%;
   row-gap: 1rem;
 }
 
 #home .heading {
-  font-size: 1.7rem;
+  font-size: 3rem;
   display: flex;
   flex-direction: column;
-
 }
 
 #home .afirmation {
@@ -24,8 +23,56 @@
   margin-top: 2rem;
 }
 
+#home .card {
+  width: 200px;
+  flex-grow: 1;
+
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 5px;
+  overflow: hidden;
+
+  text-align: left;
+}
+
+#home .card .wrapper {
+  height: 100px;
+  padding-top: 1rem;
+}
+
+#home .card .icon {
+  padding: 0 1rem;
+  height: 5.5rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom: 1px solid hsl(0, 0%, 80%);
+}
+
+#home .card:nth-of-type(1) .icon {
+  background-color: hsl(226, 100%, 66%);
+}
+#home .card:nth-of-type(2) .icon {
+  background-color: hsl(130, 46%, 48%);
+}
+#home .card:nth-of-type(3) .icon {
+  background-color: rgb(240, 162, 37);
+}
+
+#home .card .wrapper .title {
+  padding: 0 1rem;
+  font-size: 1rem;
+}
+
+#home .card .wrapper .description {
+  padding: 0 1rem;
+  padding-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
 @media screen and (min-width: 700px) {
-  .container {
+  #home.container {
     padding: 2rem 15%;
   }
 
@@ -39,7 +86,7 @@
 }
 
 @media screen and (min-width: 900px) {
-  .container {
+  #home.container {
     padding: 2rem 20%;
   }
 
