@@ -10,19 +10,19 @@ const Register = () => {
     <Container className="flex jc-center ai-center relative">
       <Form id='form-register'>
         <Input type="text" htmlFor="display_name">
-          <h3>Your Name *</h3>
+          <h3>Your Name <span className="star-red">*</span></h3>
         </Input>
         <Input type="text" htmlFor="username">
-          <h3>Username *</h3>
+          <h3>Username <span className="star-red">*</span></h3>
         </Input>
         <Input type="email" htmlFor="email">
-          <h3>Email *</h3>
+          <h3>Email <span className="star-red">*</span></h3>
         </Input>
         <Input type="password" htmlFor="password">
-          <h3>Password *</h3>
+          <h3>Password <span className="star-red">*</span></h3>
         </Input>
         <Input type="password" htmlFor="confirm_password">
-          <h3>Confirm Password *</h3>
+          <h3>Confirm Password <span className="star-red">*</span></h3>
         </Input>
 
         <Button label="Create Account" />
