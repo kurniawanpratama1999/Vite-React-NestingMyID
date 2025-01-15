@@ -6,11 +6,13 @@
     background-color: hsl(0, 0%, 25%);
     color: hsl(0, 0%, 85%);
 
+    padding: 2rem 1rem;
+
     flex-direction: column;
 }
 
 /* VARIANT CLASS */
-.center {
+.container.center {
     justify-content: center;
     align-items: center;
 }
