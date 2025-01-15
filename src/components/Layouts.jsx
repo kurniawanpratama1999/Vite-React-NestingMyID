@@ -11,7 +11,7 @@ import List from "./List";
 
 const Layouts = () => {
   const [isShowNav, setIsShowNav] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(!false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ const Layouts = () => {
               Nesting
             </NavLink>
           </h1>
-          <span>V.1.0</span>
+          <span>V-1.0</span>
         </div>
         <button type="button" onClick={handleShowNav} className="btn-menu flex absolute">
           <MdMenu />
