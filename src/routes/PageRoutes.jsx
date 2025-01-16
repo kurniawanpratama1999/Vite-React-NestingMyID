@@ -18,13 +18,23 @@ import VerifyEmailAuth from "../pages/09-VerifyEmail-auth/VerifyEmailAuth";
 import VerifyEmailAll from "../pages/10-VerifyEmail-all/VerifyEmailAll";
 import AttentionAfterRegister from "../pages/11-AttentionAfterRegister/AttentionAfterRegister";
 import Logout from "../pages/12-Logout-Auth/Logout";
+import { ProfileProvider } from "../contexts/Contexts";
 
 export const routeCollection = [
   { path: "", element: <Home />, isAuth: false, isVerify: false },
   { path: "about", element: <About />, isAuth: false, isVerify: false },
   { path: "register", element: <Register />, isAuth: false, isVerify: false },
   { path: "login", element: <Login />, isAuth: false, isVerify: false },
-  { path: "profile", element: <Profile />, isAuth: true, isVerify: false },
+  {
+    path: "profile",
+    element: (
+      <ProfileProvider>
+        <Profile />
+      </ProfileProvider>
+    ),
+    isAuth: true,
+    isVerify: false,
+  },
   { path: "/profile/change-name", element: <ChangeName />, isAuth: false, isVerify: true },
   { path: "/profile/change-username", element: <ChangeUsername />, isAuth: false, isVerify: true },
   { path: "/profile/change-email", element: <ChangeEmail />, isAuth: false, isVerify: true },

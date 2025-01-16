@@ -12,24 +12,38 @@ import VerifyPage from "./Middleware/VerifyPage";
 // STYLES
 import "./assets/styles/main.css";
 import { routeCollection } from "./routes/PageRoutes";
+import { AuthProvider } from "./contexts/Contexts";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Layouts />}>
+      <Route
+        path="/"
+        element={
+          <AuthProvider>
+            <Layouts />
+          </AuthProvider>
+        }
+      >
         {routeCollection.map((route, index) => {
           const { isAuth, isVerify, path } = route;
           let element = route.element;
           if (isAuth && isVerify) {
             element = (
-              <AuthPage>
-                <VerifyPage>{element}</VerifyPage>
-              </AuthPage>
+              <AuthProvider>
+                <AuthPage>
+                  <VerifyPage>{element}</VerifyPage>
+                </AuthPage>
+              </AuthProvider>
             );
           }
 
           if (isAuth && !isVerify) {
-            element = <AuthPage>{element}</AuthPage>;
+            element = (
+              <AuthProvider>
+                <AuthPage>{element}</AuthPage>
+              </AuthProvider>
+            );
           }
 
           if (!isAuth && isVerify) {

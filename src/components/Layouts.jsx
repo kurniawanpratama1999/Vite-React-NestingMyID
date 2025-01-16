@@ -1,6 +1,6 @@
 // DEPENDENCIES
 import { MdMenu } from "react-icons/md";
-import { useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router";
 import { Helmet } from "react-helmet";
 // COMPONENTS
@@ -8,12 +8,14 @@ import { Helmet } from "react-helmet";
 // STYLES
 import "../assets/styles/component_styles/layouts.css";
 import List from "./List";
+import { AuthContext } from "../contexts/Contexts";
 
 const Layouts = () => {
+  const { isAuth } = useContext(AuthContext);
   const [isShowNav, setIsShowNav] = useState(false);
-  const [isAuth, setIsAuth] = useState(!false);
+  const [filterdButton, setFilteredButton] = useState([]);
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const handleShowNav = () => setIsShowNav(!isShowNav);
   const buttonListCollection = [
@@ -34,6 +36,13 @@ const Layouts = () => {
       .map((letter, letterIndex) => (letterIndex === 0 ? letter.toUpperCase() : letter.toLowerCase()))
       .join("");
   };
+
+  useEffect(() => {
+    console.log(isAuth)
+    const buttons = buttonListCollection.filter((value) => value.is_auth === isAuth || value.is_auth === null);
+    setFilteredButton(buttons);
+  }, [isAuth, pathname]);
+
   return (
     <>
       <Helmet>
@@ -53,19 +62,17 @@ const Layouts = () => {
           <MdMenu />
         </button>
         <nav className={`header-nav flex ${isShowNav || "hidden"}`}>
-          {buttonListCollection.map(
-            (value) =>
-              (value.is_auth === isAuth || value.is_auth === null) && (
-                <List
-                  label={value.label}
-                  className={pathname.includes(value.label) ? "highlight-list" : "normal"}
-                  onClick={() => {
-                    navigate(`/${value.label}`);
-                    setIsShowNav(false);
-                  }}
-                />
-              )
-          )}
+          {filterdButton.map((value, index) => (
+            <List
+              key={index}
+              label={value.label}
+              className={pathname.includes(value.label) ? "highlight-list" : "normal"}
+              onClick={() => {
+                navigate(`/${value.label}`);
+                setIsShowNav(false);
+              }}
+            />
+          ))}
         </nav>
       </header>
 

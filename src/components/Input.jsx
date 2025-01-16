@@ -24,34 +24,32 @@ const Input = ({
           />
           {children}
         </>
-      ) : element === "textarea" ? (
-        <>
-          <textarea
-            style={{ resize: "none" }}
-            type={type}
-            id={htmlFor}
-            className={`input ${classInput}`}
-            name={htmlFor}
-            spellCheck="false"
-            autoComplete="off"
-            {...props}
-          />
-          {children}
-        </>
       ) : (
-        <>
-          <input
-            type="checkbox"
-            id={htmlFor}
-            className={`input ${classInput}`}
-            name={htmlFor}
-            spellCheck="false"
-            autoComplete="off"
-            {...props}
-          />
-          {children}
-        </>
+        element === "textarea" && (
+          <>
+            <textarea
+              style={{ resize: "none" }}
+              type={type}
+              id={htmlFor}
+              className={`input ${classInput}`}
+              name={htmlFor}
+              spellCheck="false"
+              autoComplete="off"
+              {...props}
+            />
+            {children}
+          </>
+        )
       )}
+    </label>
+  );
+};
+
+Input.Checkbox = ({ htmlFor = "show-password", onChange, label = "show password" }) => {
+  return (
+    <label htmlFor={htmlFor} onChange={onChange}>
+      <input type="checkbox" className="input" id={htmlFor} name={htmlFor} />
+      <span>{label}</span>
     </label>
   );
 };

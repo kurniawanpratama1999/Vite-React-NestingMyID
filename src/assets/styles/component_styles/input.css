@@ -49,3 +49,24 @@ label h3 {
   text-align: left;
   padding: 1px 5px;
 }
+
+/* FOR CHECKBOX */
+label:has(input[type="checkbox"]) {
+  border: none;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 5px;
+  font-size: .8rem;
+}
+
+label:has(input[type="checkbox"]) input {
+  width: fit-content;
+  order: 2;
+}
+
+label:has(input[type="checkbox"]) span {
+  order: 1;
+}
+
+
