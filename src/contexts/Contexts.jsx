@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
   const [isAuth, setIsAuth] = useState(null);
 
   useEffect(() => {
@@ -23,13 +23,13 @@ export const AuthProvider = ({ children }) => {
 export const ProfileContext = createContext();
 export const ProfileProvider = ({ children }) => {
   const [userProfile, setUserProfile] = useState({});
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const method = "GET";
     const net = "http://localhost:3000/api/v1/user/read-profile";
     hit_api({ method, net })
       .then((res) => {
-        console.log(res);
         if (res.success) {
           setUserProfile(res.results);
         }
@@ -37,7 +37,7 @@ export const ProfileProvider = ({ children }) => {
       .catch((err) => {
         setUserProfile({});
       });
-  }, []);
+  }, [pathname]);
 
   return <ProfileContext.Provider value={userProfile}>{children}</ProfileContext.Provider>;
 };

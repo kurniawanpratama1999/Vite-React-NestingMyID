@@ -3,16 +3,16 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 
 // LAYOUTS
-import Layouts from "./components/Layouts";
+import Layouts from "./components/Layouts/Layouts";
 
 // MIDLEWARE
-import AuthPage from "./Middleware/AuthPage";
-import VerifyPage from "./Middleware/VerifyPage";
-
-// STYLES
-import "./assets/styles/main.css";
+import AuthPage from "./Middlewares/AuthMiddleware/AuthPage";
+import VerifyPage from "./Middlewares/VerifyMiddleware/VerifyPage";
 import { routeCollection } from "./routes/PageRoutes";
 import { AuthProvider } from "./contexts/Contexts";
+
+// STYLES
+import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>

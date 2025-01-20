@@ -1,24 +1,25 @@
 import { Route } from "react-router";
 
 // PAGES
-import Home from "../pages/00-Home/Home";
-import About from "../pages/01-About/About";
-import Register from "../pages/02-Register/Register";
-import Login from "../pages/03-Login/Login";
-import Profile from "../pages/05-Profile-auth/Profile";
-import ChangeName from "../pages/05.01-ChangeName-verify/ChangeName";
-import ChangeUsername from "../pages/05.02-ChangeUsername-verify/ChangeUsername";
-import ChangeEmail from "../pages/05.03-ChangeEmail-verify/ChangeEmail";
-import ChangePassword from "../pages/05.04-ChangePassword-verify/ChangePassword";
-import RequsetActivation from "../pages/05.05-RequestActivation-auth/RequestActivation";
-import CreateAndUpdate from "../pages/06-CreateAndUpdate-auth-verify/CreateAndUpdate";
-import Collection from "../pages/07-Collection-auth/Collection";
-import UrlCollection from "../pages/08-UrlCollection-auth-verify/UrlCollection";
-import VerifyEmailAuth from "../pages/09-VerifyEmail-auth/VerifyEmailAuth";
-import VerifyEmailAll from "../pages/10-VerifyEmail-all/VerifyEmailAll";
-import AttentionAfterRegister from "../pages/11-AttentionAfterRegister/AttentionAfterRegister";
-import Logout from "../pages/12-Logout-Auth/Logout";
+import Home from "../pages/Home/Home";
+import About from "../pages/About/About";
+import Register from "../pages/Register/Register";
+import Login from "../pages/Login/Login";
+import Profile from "../pages/auth-Profile/Profile";
+import ChangeName from "../pages/auth-Profile/auth-ChangeName/ChangeName";
+import ChangeUsername from "../pages/auth-Profile/auth-ChangeUsername/ChangeUsername";
+import ChangeEmail from "../pages/auth-Profile/auth-ChangeEmail/ChangeEmail";
+import ChangePassword from "../pages/auth-Profile/auth-verify-ChangePassword/ChangePassword";
+import RequsetActivation from "../pages/auth-RequestActivation/RequestActivation";
+import CreateAndUpdate from "../pages/auth-verify-CreateAndUpdate/CreateAndUpdate";
+import Collection from "../pages/auth-Collection/Collection";
+import UrlCollection from "../pages/auth-verify-UrlCollection/UrlCollection";
+import VerifyEmailAuth from "../pages/auth-VerifyEmail/VerifyEmailAuth";
+import VerifyEmailAll from "../pages/VerifyEmail/VerifyEmailAll";
+import NotificationAfterRegister from "../pages/auth-NotificationAfterRegister/NotificationAfterRegister";
+import Logout from "../pages/auth-Logout/Logout";
 import { ProfileProvider } from "../contexts/Contexts";
+import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
 
 export const routeCollection = [
   { path: "", element: <Home />, isAuth: false, isVerify: false },
@@ -35,17 +36,27 @@ export const routeCollection = [
     isAuth: true,
     isVerify: false,
   },
-  { path: "/profile/change-name", element: <ChangeName />, isAuth: false, isVerify: true },
-  { path: "/profile/change-username", element: <ChangeUsername />, isAuth: false, isVerify: true },
-  { path: "/profile/change-email", element: <ChangeEmail />, isAuth: false, isVerify: true },
-  { path: "/profile/change-password", element: <ChangePassword />, isAuth: false, isVerify: true },
+  { path: "/profile/change-name", element: <ChangeName />, isAuth: true, isVerify: false },
+  { path: "/profile/change-username", element: <ChangeUsername />, isAuth: true, isVerify: false },
+  { path: "/profile/change-email", element: <ChangeEmail />, isAuth: true, isVerify: false },
+  { path: "/profile/change-password", element: <ChangePassword />, isAuth: true, isVerify: true },
   { path: "/profile/request-activation", element: <RequsetActivation />, isAuth: false, isVerify: true },
   { path: "create", element: <CreateAndUpdate />, isAuth: true, isVerify: true },
   { path: "Update", element: <CreateAndUpdate />, isAuth: true, isVerify: true },
   { path: "collection", element: <Collection />, isAuth: true, isVerify: false },
   { path: "collection/:link", element: <UrlCollection />, isAuth: true, isVerify: true },
-  { path: "verify-email-auth", element: <VerifyEmailAuth />, isAuth: true, isVerify: false },
+  { path: "email-verification/:otp_encode", element: <VerifyEmailAuth />, isAuth: true, isVerify: false },
   { path: "verify-email-all", element: <VerifyEmailAll />, isAuth: false, isVerify: false },
-  { path: "register/attention", element: <AttentionAfterRegister />, isAuth: false, isVerify: false },
+  {
+    path: "notification-after-register",
+    element: (
+      <ProfileProvider>
+        <NotificationAfterRegister />
+      </ProfileProvider>
+    ),
+    isAuth: true,
+    isVerify: false,
+  },
   { path: "logout", element: <Logout />, isAuth: true, isVerify: false },
+  { path: "forget-password", element: <ForgetPassword />, isAuth: false, isVerify: false },
 ];
