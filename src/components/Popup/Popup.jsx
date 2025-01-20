@@ -2,7 +2,8 @@ import Wrapper from "../Wrapper/Wrapper";
 import Button from "../Button/Button";
 import popupStyles from "./popup";
 
-const Popup = ({ message = "Lorem ipsum dolor sit amet!", cMessage = null, handleClose }) => {
+const Popup = ({ message, cMessage, handleClose }) => {
+  const isLoading = message.toString().includes("loading");
   return (
     <>
       <Wrapper position="fixed top-0 left-0" width="full" height="h-full" bgColor="bg-black/30 backdrop-blur-sm" />
@@ -14,18 +15,24 @@ const Popup = ({ message = "Lorem ipsum dolor sit amet!", cMessage = null, handl
         bgColor="auto"
         className={popupStyles.wrapper}
       >
-        <div className={popupStyles.wrapperHeading({ cMessage })}>
-          <h4 className={popupStyles.heading({ cMessage })}>
-            {cMessage === null ? "Notification" : cMessage ? "Failed" : "Success"}
-          </h4>
-        </div>
-        <p className={popupStyles.message}>"{message}"</p>
-        <Button
-          onClick={handleClose}
-          bgColor="bg-zinc-500 text-white"
-          label="Kembali"
-          className={popupStyles.btnClose}
-        />
+        {isLoading ? (
+          <p>Loading</p>
+        ) : (
+          <>
+            <div className={popupStyles.wrapperHeading({ cMessage })}>
+              <h4 className={popupStyles.heading({ cMessage })}>
+                {cMessage === null ? "Notification" : cMessage ? "Failed" : "Success"}
+              </h4>
+            </div>
+            <p className={popupStyles.message}>{message}</p>
+            <Button
+              onClick={handleClose}
+              bgColor="bg-zinc-500 text-white"
+              label="Kembali"
+              className={popupStyles.btnClose}
+            />
+          </>
+        )}
       </Wrapper>
     </>
   );
