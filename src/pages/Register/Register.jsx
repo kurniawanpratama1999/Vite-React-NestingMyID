@@ -1,5 +1,5 @@
 // DEPENDENCIES
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 
 // COMPONENT
@@ -9,6 +9,9 @@ import Input, { Checkbox } from "../../components/Input/Input";
 import Form from "../../components/Form/Form";
 
 const Register = () => {
+  // state
+  const navigate = useNavigate()
+
   // Password toggle show
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
@@ -23,7 +26,7 @@ const Register = () => {
   });
 
   const callback_IfSuccess = () => {
-    console.log("if success jalan");
+    navigate("/notification-after-register")
   };
 
   return (

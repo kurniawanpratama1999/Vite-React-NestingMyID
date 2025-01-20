@@ -16,7 +16,9 @@ const Popup = ({ message, cMessage, handleClose }) => {
         className={popupStyles.wrapper}
       >
         {isLoading ? (
-          <p>Loading</p>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl">
+            <p className="animate-bounce">loading</p>
+          </div>
         ) : (
           <>
             <div className={popupStyles.wrapperHeading({ cMessage })}>

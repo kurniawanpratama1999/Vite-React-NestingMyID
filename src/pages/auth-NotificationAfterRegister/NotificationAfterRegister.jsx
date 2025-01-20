@@ -1,13 +1,20 @@
 import { useContext } from "react";
 import Container from "../../components/Container/Container";
 import { ProfileContext } from "../../contexts/Contexts";
+import { BiCheckCircle } from "react-icons/bi";
 
 const NotificationAfterRegister = () => {
   const profileContext = useContext(ProfileContext);
   return (
-    <Container id="NotificationAfterRegister" className="flex jc-center ai-center relative">
-      <h5 className="text-2xl">Pendaftaran Berhasil</h5>
-      <p className="text-xl">Silakan check email {profileContext?.email} untuk melakukan aktivasi melalui link yang sudah kami kirimkan.</p>
+    <Container>
+      <h5 className="text-2xl flex justify-center items-center gap-2 font-bold py-2 px-3 bg-green-500 text-green-100 rounded">
+        <BiCheckCircle className="text-4xl" />
+        Pendaftaran Anda Berhasil
+      </h5>
+      <div className="mt-4 ">
+        <p className="text-xl">Silakan check <b>pesan masuk</b> atau <b>spam email</b> {profileContext?.email}</p>
+        <p className="text-xl">Kami mengirimkan anda link aktivasi</p>
+      </div>
     </Container>
   );
 };
