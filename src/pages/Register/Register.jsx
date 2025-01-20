@@ -75,7 +75,7 @@ const Register = () => {
         setShowMessage={setShowMessage}
         handleClose={handleClose}
       >
-        <h3 className="text-center text-xl col-span-2">Cukup Satu Tautan</h3>
+        <h3 className="text-center text-xl desktop:col-span-2">Cukup Satu Tautan</h3>
 
         <Input
           type="text"
@@ -123,9 +123,20 @@ const Register = () => {
           onChange={({ target }) => setRegisterData((prev) => ({ ...prev, confirm_password: target.value }))}
         />
 
-        <Checkbox htmlFor="show-password" label="show password" className="desktop:col-span-2" onChange={handleShowPassword} />
+        <Checkbox
+          htmlFor="show-password"
+          label="show password"
+          className="desktop:col-span-2"
+          onChange={handleShowPassword}
+        />
 
-        <Button id="handle-submit" label="Create Account" bgColor="blue" onClick={handleSubmit} className="desktop:col-span-2"/>
+        <Button
+          id="handle-submit"
+          label="Create Account"
+          bgColor="blue"
+          onClick={handleSubmit}
+          className="desktop:col-span-2"
+        />
 
         <p className="text-sm text-center desktop:col-span-2">
           Already have an account? <NavLink to="/login">Login</NavLink>
