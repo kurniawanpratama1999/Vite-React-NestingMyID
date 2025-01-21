@@ -16,13 +16,19 @@ const Login = () => {
   // Collect Data
   const [dataLogin, setDataLogin] = useState({ username_or_email: "", password: "" });
 
+  const fetcher_props = {
+    net: "http://localhost:3000/api/v1/auth/login",
+    body: { dataLogin },
+    method: "POST",
+  };
+
   const callback_IfSuccess = () => {
     console.log("if success jalan");
   };
 
   return (
     <Container>
-      <Form obody={dataLogin} net="http://localhost:3000/api/v1/auth/login" method="POST" callback={callback_IfSuccess}>
+      <Form fetcher_props={fetcher_props} callback={callback_IfSuccess}>
         <h3 className="text-center text-xl">Cukup Satu Tautan</h3>
         <Input
           type="text"

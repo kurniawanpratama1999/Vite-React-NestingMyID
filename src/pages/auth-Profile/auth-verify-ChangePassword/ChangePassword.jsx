@@ -6,19 +6,12 @@ import Button from "../../../components/Button/Button";
 
 const ChangePassword = () => {
   return (
-    <Container id="changePassword" className="grid">
-      <Form id="form-changePassword" className="grid">
-        <Input htmlFor="old_password">
-          <h3>
-            Old Password <span className="star-red">*</span>
-          </h3>
-        </Input>
-        <Input htmlFor="new_password">
-          <h3>
-            New Password <span className="star-red">*</span>
-          </h3>
-        </Input>
-        <Button label="Save Changes" className="bg-green" />
+    <Container>
+      <Form>
+        <Input htmlFor="old_password" detail="Old Password :" focus="blue"/>
+        <Input htmlFor="new_password" detail="New Password :" focus="blue"/>
+        <Input htmlFor="confirm_new_password" detail="Confirm New Password" focus="blue"/>
+        <Button label="Save Changes" bgColor="blue" />
       </Form>
     </Container>
   );

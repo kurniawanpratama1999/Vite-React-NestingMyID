@@ -8,9 +8,7 @@ const Home = () => {
       <Helmet>
         <meta
           name="description"
-          content={`Satu Tautan Terhubung Tanpa Batas. Kini Mengelola Alamat Web menjadi lebih mudah, ${window.origin.slice(
-            7
-          )} membantu anda untuk menampung semua
+          content={`Satu Tautan Terhubung Tanpa Batas. Kini Mengelola Alamat Web menjadi lebih mudah, Nesting My ID membantu anda untuk menampung semua
           Alamat Web menjadi Satu. Daftar lalu rasakan kemudahannya.`}
         />
       </Helmet>
@@ -21,8 +19,8 @@ const Home = () => {
           <span>Terhubung Tanpa Batas</span>
         </h2>
         <p className="afirmation">
-          Kini Mengelola Alamat Web menjadi lebih mudah, {window.origin.slice(7)} membantu anda untuk menampung semua
-          Alamat Web menjadi Satu. Daftar lalu rasakan kemudahannya.
+          Kini Mengelola Alamat Web menjadi lebih mudah, Nesting My ID membantu anda untuk menampung semua Alamat Web
+          menjadi Satu. Daftar lalu rasakan kemudahannya.
         </p>
         <div className="card-wrapper flex flex-wrap">
           <Comp_Card iconType={1} title="Satu Tautan">

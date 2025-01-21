@@ -6,19 +6,11 @@ import Button from "../../../components/Button/Button";
 
 const ChangeEmail = () => {
   return (
-    <Container id="changeEmail" className="grid">
-      <Form id="form-changeEmail" className="grid">
-        <Input htmlFor="old_email">
-          <h3>
-            Old Email <span className="star-red">*</span>
-          </h3>
-        </Input>
-        <Input htmlFor="new_email">
-          <h3>
-            New Email <span className="star-red">*</span>
-          </h3>
-        </Input>
-        <Button label="Save Changes" className="bg-green" />
+    <Container>
+      <Form>
+        <Input htmlFor="new_email" detail="New Email :" focus="blue" />
+        <Input type="text" htmlFor="otp" detail="Input OTP :" focus="blue" />
+        <Button label="Save New Email" bgColor="blue" />
       </Form>
     </Container>
   );

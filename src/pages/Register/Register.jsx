@@ -10,7 +10,7 @@ import Form from "../../components/Form/Form";
 
 const Register = () => {
   // state
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // Password toggle show
   const [showPassword, setShowPassword] = useState(false);
@@ -25,18 +25,18 @@ const Register = () => {
     confirm_password: "",
   });
 
-  const callback_IfSuccess = () => {
-    navigate("/notification-after-register")
+  const fetcher_props = {
+    net: "http://localhost:3000/api/v1/auth/register",
+    body: { registerData },
+    method: "POST",
   };
 
+  const callback_IfSuccess = () => {
+    navigate("/notification-after-register");
+  };
   return (
     <Container>
-      <Form
-        body={registerData}
-        net="http://localhost:3000/api/v1/auth/register"
-        method="POST"
-        callback={callback_IfSuccess}
-      >
+      <Form fetcher_props={fetcher_props} callback={callback_IfSuccess}>
         <h3 className="text-center text-xl desktop:col-span-2">Cukup Satu Tautan</h3>
 
         <Input

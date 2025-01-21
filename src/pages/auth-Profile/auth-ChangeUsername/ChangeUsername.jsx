@@ -1,24 +1,17 @@
 import React from "react";
 import Container from "../../../components/Container/Container";
 import Form from "../../../components/Form/Form";
-import Input from "../../../components/Input/Input";
+import Input, { Checkbox } from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
 
 const ChangeUsername = () => {
   return (
-    <Container id="changeUsername" className="grid">
-      <Form id="form-changeUsername" className="grid">
-        <Input htmlFor="old_username">
-          <h3>
-            Old Name <span className="star-red">*</span>
-          </h3>
-        </Input>
-        <Input htmlFor="new_username">
-          <h3>
-            New Name <span className="star-red">*</span>
-          </h3>
-        </Input>
-        <Button label="Save Changes" className="bg-green" />
+    <Container>
+      <Form>
+        <Input htmlFor="new_username" detail="New Username :" focus="blue" />
+        <Input type="password" htmlFor="password" detail="Password :" focus="blue" />
+        <Checkbox htmlFor="show-password" />
+        <Button label="Save Changes" bgColor="blue" />
       </Form>
     </Container>
   );

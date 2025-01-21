@@ -4,20 +4,20 @@ import { fetcher } from "../../utils/fetcher";
 import { useNavigate, useParams } from "react-router";
 
 const VerifyEmailAuth = () => {
-  const [response, setResponse] = useState("");
-  const { otp_encode } = useParams();
+  const [response, setResponse] = useState("Sedang Mencocokan Data");
+  const { email, otp_encode } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     const method = "POST";
     const net = "http://localhost:3000/api/v1/auth/analys-email-activation";
-    fetcher({ method, net, body: { otp_encode } })
+    fetcher({ method, net, body: { email, otp_encode } })
       .then((resServer) => {
         setResponse(resServer.message);
         if (resServer.success) {
           setTimeout(() => {
             navigate("/profile");
-          }, 2000);
+          }, 3000);
         }
       })
       .catch((err) => setResponse(err.message));

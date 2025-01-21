@@ -1,6 +1,9 @@
 import { fetcher } from "./fetcher";
 
-const handleSubmit = (e, method, net, body, setShowMessage, setCMessage, setMessage, timeOutID, callback) => {
+// {getFetcher, }
+const handleSubmit = (e, fetcher_props, state_props, callback) => {
+  const { method, net, body } = fetcher_props;
+  const { setShowMessage, setCMessage, setMessage, timeOutID } = state_props;
   e.preventDefault();
   clearTimeout(timeOutID.current);
 

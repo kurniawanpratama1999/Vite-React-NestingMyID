@@ -2,7 +2,8 @@ import Wrapper from "../Wrapper/Wrapper";
 import Button from "../Button/Button";
 import popupStyles from "./popup";
 
-const Popup = ({ message, cMessage, handleClose }) => {
+const Popup = ({ popup_props }) => {
+  const { message, cMessage, handleClose } = popup_props;
   const isLoading = message.toString().includes("loading");
   return (
     <>
@@ -17,13 +18,13 @@ const Popup = ({ message, cMessage, handleClose }) => {
       >
         {isLoading ? (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl">
-            <p className="animate-bounce">loading</p>
+            <p className="animate-bounce">Loading</p>
           </div>
         ) : (
           <>
             <div className={popupStyles.wrapperHeading({ cMessage })}>
               <h4 className={popupStyles.heading({ cMessage })}>
-                {cMessage === null ? "Notification" : cMessage ? "Failed" : "Success"}
+                {cMessage === null ? "Notification" : cMessage ? "Success" : "Failed"}
               </h4>
             </div>
             <p className={popupStyles.message}>{message}</p>

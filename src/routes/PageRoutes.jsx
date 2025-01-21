@@ -45,7 +45,7 @@ export const routeCollection = [
   { path: "Update", element: <CreateAndUpdate />, isAuth: true, isVerify: true },
   { path: "collection", element: <Collection />, isAuth: true, isVerify: false },
   { path: "collection/:link", element: <UrlCollection />, isAuth: true, isVerify: true },
-  { path: "email-verification/:otp_encode", element: <VerifyEmailAuth />, isAuth: true, isVerify: false },
+  { path: "email-verification/:email/:otp_encode", element: <VerifyEmailAuth />, isAuth: false, isVerify: false },
   { path: "verify-email-all", element: <VerifyEmailAll />, isAuth: false, isVerify: false },
   {
     path: "notification-after-register",
