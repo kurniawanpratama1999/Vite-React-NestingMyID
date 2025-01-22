@@ -19,7 +19,10 @@ import VerifyEmailAll from "../pages/VerifyEmail/VerifyEmailAll";
 import NotificationAfterRegister from "../pages/auth-NotificationAfterRegister/NotificationAfterRegister";
 import Logout from "../pages/auth-Logout/Logout";
 import { ProfileProvider } from "../contexts/Contexts";
-import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
+import Step1_InsertEmail from "../pages/ForgetPassword/Step1_InsertEmail";
+import Step2_CheckUsername from "../pages/ForgetPassword/Step2_CheckUsername";
+import Step3_InsertNewPassword from "../pages/ForgetPassword/Step3_InsertNewPassword";
+import Nofitication_ForgetPassword from "../pages/ForgetPassword/Nofitication_ForgetPassword";
 
 export const routeCollection = [
   { path: "", element: <Home />, isAuth: false, isVerify: false },
@@ -58,5 +61,30 @@ export const routeCollection = [
     isVerify: false,
   },
   { path: "logout", element: <Logout />, isAuth: true, isVerify: false },
-  { path: "forget-password", element: <ForgetPassword />, isAuth: false, isVerify: false },
+  {
+    path: "forget-password",
+    element: (
+      <Step1_InsertEmail>
+        <Step2_CheckUsername />
+      </Step1_InsertEmail>
+    ),
+    isAuth: false,
+    isVerify: false,
+  },
+  {
+    path: "forget-password/notification",
+    element: (
+      <Step2_CheckUsername>
+        <Nofitication_ForgetPassword />
+      </Step2_CheckUsername>
+    ),
+    isAuth: false,
+    isVerify: false,
+  },
+  {
+    path: "forget-password/:email/:username/:otp",
+    element: <Step3_InsertNewPassword />,
+    isAuth: false,
+    isVerify: false,
+  },
 ];

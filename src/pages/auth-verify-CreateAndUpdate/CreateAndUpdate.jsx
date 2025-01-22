@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Container from "../../components/Container/Container";
-import Form from "../../components/Form/Form";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useLocation } from "react-router";
 import { BiRefresh, BiSolidTrash } from "react-icons/bi";
+import formStyles from "../../components/Form/form";
 
 const CreateAndUpdate = () => {
   const { pathname } = useLocation();
@@ -20,7 +20,7 @@ const CreateAndUpdate = () => {
   const focusColor = pathname.includes("create") ? "focus-green" : "focus-blue";
   return (
     <Container className="static">
-      <Form id="createAndUpdate">
+      <form className={formStyles.form({})}>
         <Input element="textarea" htmlFor="description" classLabel={`${focusColor}`}>
           <h3>Description</h3>
         </Input>
@@ -43,7 +43,7 @@ const CreateAndUpdate = () => {
           <Button className="bg-green" label="Simpan" />
           <Button label="Tambah" />
         </div>
-      </Form>
+      </form>
     </Container>
   );
 };

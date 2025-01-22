@@ -1,20 +1,31 @@
 // DEPENDENCIES
 import { NavLink, useNavigate } from "react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 // COMPONENT
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
 import Input, { Checkbox } from "../../components/Input/Input";
-import Form from "../../components/Form/Form";
+import formStyles from "../../components/Form/form";
+import Popup from "../../components/Popup/Popup";
 
 const Register = () => {
   // state
   const navigate = useNavigate();
 
+  // Message Settings
+  const [message, setMessage] = useState("loading");
+  const [cMessage, setCMessage] = useState(null);
+  const [showMessage, setShowMessage] = useState(false);
+  const timeOutID = useRef(null);
+
   // Password toggle show
   const [showPassword, setShowPassword] = useState(false);
+
   const handleShowPassword = () => setShowPassword(!showPassword);
+
+  // Handle Close
+  const handleClose = () => setShowMessage(false);
 
   // Collect Data
   const [registerData, setRegisterData] = useState({
@@ -25,18 +36,37 @@ const Register = () => {
     confirm_password: "",
   });
 
+  // State_Props
+  const state_props = {
+    setCMessage,
+    setMessage,
+    setShowMessage,
+    timeOutID,
+  };
+
+  // Popup Props
+  const popup_props = {
+    cMessage,
+    message,
+    handleClose,
+  };
+
   const fetcher_props = {
     net: "http://localhost:3000/api/v1/auth/register",
     body: { registerData },
     method: "POST",
   };
 
-  const callback_IfSuccess = () => {
-    navigate("/notification-after-register");
+  const callback = () => {
+    navigate("/notification-after-register", { replace: true });
   };
+
+  // Handle Submit
+  const submitButton = (e) => handleSubmit(e, fetcher_props, state_props, callback);
   return (
     <Container>
-      <Form fetcher_props={fetcher_props} callback={callback_IfSuccess}>
+      {showMessage && <Popup popup_props={popup_props} />}
+      <form className={formStyles.form({})}>
         <h3 className="text-center text-xl desktop:col-span-2">Cukup Satu Tautan</h3>
 
         <Input
@@ -92,12 +122,18 @@ const Register = () => {
           onChange={handleShowPassword}
         />
 
-        <Button label="Create Account" bgColor="blue" className="desktop:col-span-2" />
+        <Button
+          type="button"
+          label="Create Account"
+          bgColor="blue"
+          className="desktop:col-span-2"
+          onClick={submitButton}
+        />
 
         <p className="text-sm text-center desktop:col-span-2">
           Already have an account? <NavLink to="/login">Login</NavLink>
         </p>
-      </Form>
+      </form>
     </Container>
   );
 };
