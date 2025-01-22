@@ -19,8 +19,8 @@ import VerifyEmailAll from "../pages/VerifyEmail/VerifyEmailAll";
 import NotificationAfterRegister from "../pages/auth-NotificationAfterRegister/NotificationAfterRegister";
 import Logout from "../pages/auth-Logout/Logout";
 import { ProfileProvider } from "../contexts/Contexts";
-import Step1_InsertEmail from "../pages/ForgetPassword/Step1_InsertEmail";
-import Step2_CheckUsername from "../pages/ForgetPassword/Step2_CheckUsername";
+import { Step1_InsertEmail } from "../pages/ForgetPassword/Step1_InsertEmail";
+import { Step2_CheckUsername } from "../pages/ForgetPassword/Step2_CheckUsername";
 import Step3_InsertNewPassword from "../pages/ForgetPassword/Step3_InsertNewPassword";
 import Nofitication_ForgetPassword from "../pages/ForgetPassword/Nofitication_ForgetPassword";
 

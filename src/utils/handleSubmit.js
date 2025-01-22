@@ -1,13 +1,16 @@
+import { useEffect } from "react";
 import { fetcher } from "./fetcher";
 
 // {getFetcher, }
-const handleSubmit = (e, fetcher_props, state_props, callback) => {
+const handleSubmit = async ({ e, fetcher_props, state_props, btnpopup_props, callback }) => {
+  e.preventDefault();
   const { method, net, body } = fetcher_props;
   const { setShowMessage, setCMessage, setMessage, timeOutID } = state_props;
-  e.preventDefault();
+  const { setLastClickBtnPopup } = btnpopup_props;
   clearTimeout(timeOutID.current);
 
   setShowMessage(true);
+  setLastClickBtnPopup(new Date());
   fetcher({ method, net, body })
     .then((res) => {
       setCMessage(res.success);
@@ -20,12 +23,6 @@ const handleSubmit = (e, fetcher_props, state_props, callback) => {
     .catch((err) => {
       setCMessage(null);
       setMessage(err.message);
-    })
-    .finally(() => {
-      timeOutID.current = setTimeout(() => {
-        setShowMessage(false);
-        setMessage("loading");
-      }, 10000);
     });
 };
 

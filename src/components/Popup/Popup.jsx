@@ -1,10 +1,29 @@
 import Wrapper from "../Wrapper/Wrapper";
 import Button from "../Button/Button";
 import popupStyles from "./popup";
+import { useEffect } from "react";
 
-const Popup = ({ popup_props }) => {
+const Popup = ({ state_props, popup_props, btnpopup_props }) => {
   const { message, cMessage, handleClose } = popup_props;
+  const { timeBtnBackPopup, timeIntervalBtnPopup, lastClickBtnPopup, setTimeBtnBackPopup } = btnpopup_props;
+  const { setMessage, setShowMessage } = state_props;
   const isLoading = message.toString().includes("loading");
+
+  useEffect(() => {
+    clearInterval(timeIntervalBtnPopup.current);
+    if (lastClickBtnPopup) {
+      timeIntervalBtnPopup.current = setInterval(() => {
+        setTimeBtnBackPopup((prev) => ({ ...prev, start: prev.start - 1 }));
+        if (timeBtnBackPopup.start <= 1) {
+          setShowMessage(false);
+          setMessage("loading");
+          clearInterval(timeIntervalBtnPopup.current);
+          setTimeBtnBackPopup((prev) => ({ ...prev, start: prev.repeat }));
+        }
+      }, 1000);
+    }
+    return () => clearInterval(timeIntervalBtnPopup.current);
+  }, [lastClickBtnPopup, timeBtnBackPopup]);
   return (
     <>
       <Wrapper position="fixed top-0 left-0" width="full" height="h-full" bgColor="bg-black/30 backdrop-blur-sm" />
@@ -31,7 +50,7 @@ const Popup = ({ popup_props }) => {
             <Button
               onClick={handleClose}
               bgColor="bg-zinc-500 text-white"
-              label="Kembali"
+              label={`Kembali ${timeBtnBackPopup.start}`}
               className={popupStyles.btnClose}
             />
           </>

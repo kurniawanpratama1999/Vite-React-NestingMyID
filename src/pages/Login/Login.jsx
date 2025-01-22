@@ -60,8 +60,8 @@ const Login = () => {
 
   return (
     <Container>
-      {showMessage && <Popup popup_props={popup_props} />}
       <form className={formStyles.form({})}>
+        {showMessage && <Popup popup_props={popup_props} />}
         <h3 className="text-center text-xl">Cukup Satu Tautan</h3>
         <Input
           type="text"
@@ -69,6 +69,7 @@ const Login = () => {
           detail="username or email :"
           value={dataLogin.username_or_email}
           onChange={({ target }) => setDataLogin((prev) => ({ ...prev, username_or_email: target.value }))}
+          required
         />
 
         <Input
@@ -77,6 +78,7 @@ const Login = () => {
           detail="password :"
           value={dataLogin.password}
           onChange={({ target }) => setDataLogin((prev) => ({ ...prev, password: target.value }))}
+          required
         />
 
         <Checkbox htmlFor="show-password" label="show password" onChange={handleShowPassword} />

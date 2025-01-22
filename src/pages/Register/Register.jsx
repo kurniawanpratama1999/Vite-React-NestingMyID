@@ -65,8 +65,8 @@ const Register = () => {
   const submitButton = (e) => handleSubmit(e, fetcher_props, state_props, callback);
   return (
     <Container>
-      {showMessage && <Popup popup_props={popup_props} />}
       <form className={formStyles.form({})}>
+        {showMessage && <Popup popup_props={popup_props} />}
         <h3 className="text-center text-xl desktop:col-span-2">Cukup Satu Tautan</h3>
 
         <Input
@@ -76,6 +76,7 @@ const Register = () => {
           focus="blue"
           value={registerData.display_name}
           onChange={({ target }) => setRegisterData((prev) => ({ ...prev, display_name: target.value }))}
+          required
         />
 
         <Input
@@ -85,6 +86,7 @@ const Register = () => {
           focus="blue"
           value={registerData.username}
           onChange={({ target }) => setRegisterData((prev) => ({ ...prev, username: target.value }))}
+          required
         />
 
         <Input
@@ -95,6 +97,7 @@ const Register = () => {
           focus="blue"
           value={registerData.email}
           onChange={({ target }) => setRegisterData((prev) => ({ ...prev, email: target.value }))}
+          required
         />
 
         <Input
@@ -104,6 +107,7 @@ const Register = () => {
           focus="blue"
           value={registerData.password}
           onChange={({ target }) => setRegisterData((prev) => ({ ...prev, password: target.value }))}
+          required
         />
 
         <Input
@@ -113,6 +117,7 @@ const Register = () => {
           value={registerData.confirm_password}
           focus="blue"
           onChange={({ target }) => setRegisterData((prev) => ({ ...prev, confirm_password: target.value }))}
+          required
         />
 
         <Checkbox
