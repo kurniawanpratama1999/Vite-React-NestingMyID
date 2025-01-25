@@ -11,14 +11,25 @@ export const Step1_InsertEmail = ({ children }) => {
   const [isUserExist, SetIsUserExist] = useState(false);
   const [email, setEmail] = useState("");
 
+  const [leftTime, setLeftTime] = useState({
+    leftHour: "",
+    leftMinute: "",
+    leftsecond: "",
+  });
+
   // Message Settings;
-  const [response, setResponse] = useState({ success: null, message: "loading" });
+  const [response, setResponse] = useState({
+    success: null,
+    message: "loading",
+  });
   const [showMessage, setShowMessage] = useState(false);
   const timeOutID = useRef(null);
 
   // Handle Close
   const REPEAT_TIME_BTN_POPUP = 10;
-  const [timeBtnBackPopup, setTimeBtnBackPopup] = useState(REPEAT_TIME_BTN_POPUP);
+  const [timeBtnBackPopup, setTimeBtnBackPopup] = useState(
+    REPEAT_TIME_BTN_POPUP
+  );
   const [lastClickBtnPopup, setLastClickBtnPopup] = useState(null);
   const timeIntervalBtnPopup = useRef(null);
 
@@ -81,12 +92,22 @@ export const Step1_InsertEmail = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log(response)
-    setTimer(response?.time)
+    setTimer(response?.time || 5);
   }, [response]);
 
   // Clean up
   useEffect(() => {
+    setLeftTime((prev) => ({
+      ...prev,
+      leftHour: Math.floor(timer / 3600)
+        .toString()
+        .padStart(2, 0),
+      leftMinute: Math.floor((timer % 3600) / 60)
+        .toString()
+        .padStart(2, 0),
+      leftsecond: (timer % 60).toString().padStart(2, 0),
+    }));
+
     if (timer <= 1) {
       clearInterval(timeOutBtn.current);
       setDisableButton(false);
@@ -120,22 +141,23 @@ export const Step1_InsertEmail = ({ children }) => {
   const callback = () => {
     SetIsUserExist(true);
     setLastClick(null);
-    // handleClose();
   };
-
-  const leftMinute = Math.floor(timer / 60)
-    .toString()
-    .padStart(2, 0);
-
-  const leftsecond = (timer % 60).toString().padStart(2, 0);
 
   // ELEMENT
   return isUserExist ? (
-    <InsertEmailContext.Provider value={{ email }}>{children}</InsertEmailContext.Provider>
+    <InsertEmailContext.Provider value={{ email }}>
+      {children}
+    </InsertEmailContext.Provider>
   ) : (
     <Container>
       <form className={formStyles.form({})} onSubmit={submitButton}>
-        {showMessage && <Popup popup_props={popup_props} btnpopup_props={btnpopup_props} state_props={state_props} />}
+        {showMessage && (
+          <Popup
+            popup_props={popup_props}
+            btnpopup_props={btnpopup_props}
+            state_props={state_props}
+          />
+        )}
         <p>Step 1 - Insert Your Email</p>
         <Input
           type="email"
@@ -148,7 +170,11 @@ export const Step1_InsertEmail = ({ children }) => {
         />
         <Button
           type="submit"
-          label={disbleButton ? `Click Again At ${leftMinute}:${leftsecond}` : "Confirm"}
+          label={
+            disbleButton
+              ? `Click Again At ${leftTime.leftHour}:${leftTime.leftMinute}:${leftTime.leftsecond}`
+              : "Confirm"
+          }
           bgColor="blue"
           className="disabled:bg-gray-400"
           disabled={disbleButton}

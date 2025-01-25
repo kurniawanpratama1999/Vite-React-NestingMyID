@@ -2,25 +2,39 @@ import Container from "../../components/Container/Container";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useContext, useEffect, useRef, useState } from "react";
-import { InsertEmailContext, CheckUsernameContext } from "../../contexts/CustomContext/CustomContext";
+import {
+  InsertEmailContext,
+  CheckUsernameContext,
+} from "../../contexts/CustomContext/CustomContext";
 import Popup from "../../components/Popup/Popup";
 import handleSubmit from "../../utils/handleSubmit";
 import formStyles from "../../components/Form/form";
-import { useNavigate } from "react-router";
 
 export const Step2_CheckUsername = ({ children }) => {
   const { email } = useContext(InsertEmailContext);
   const [username, setUsername] = useState("");
   const [emailAndUsernameIsMatch, setEmailAndUsernameIsMatch] = useState(false);
 
+  const [leftTime, setLeftTime] = useState({
+    leftHour: "",
+    leftMinute: "",
+    leftsecond: "",
+  });
+
   // Message Settings
-  const [response, setResponse] = useState({ success: null, message: "loading", time: 10 });
+  const [response, setResponse] = useState({
+    success: null,
+    message: "loading",
+    time: 10,
+  });
   const [showMessage, setShowMessage] = useState(false);
   const timeOutID = useRef(null);
 
   // Handle Close
   const REPEAT_TIME_BTN_POPUP = 10;
-  const [timeBtnBackPopup, setTimeBtnBackPopup] = useState(REPEAT_TIME_BTN_POPUP);
+  const [timeBtnBackPopup, setTimeBtnBackPopup] = useState(
+    REPEAT_TIME_BTN_POPUP
+  );
   const [lastClickBtnPopup, setLastClickBtnPopup] = useState(null);
   const timeIntervalBtnPopup = useRef(null);
 
@@ -83,15 +97,22 @@ export const Step2_CheckUsername = ({ children }) => {
   };
 
   useEffect(() => {
-    if (response.success) {
-      setTimer(response?.time || 10);
-    } else {
-      setTimer(10);
-    }
-  }, []);
+    console.log(response);
+    setTimer(response?.time || 10);
+  }, [response]);
 
   // clean up
   useEffect(() => {
+    setLeftTime((prev) => ({
+      ...prev,
+      leftHour: Math.floor(timer / 3600)
+        .toString()
+        .padStart(2, 0),
+      leftMinute: Math.floor((timer % 3600) / 60)
+        .toString()
+        .padStart(2, 0),
+      leftsecond: (timer % 60).toString().padStart(2, 0),
+    }));
     if (timer.start <= 1) {
       clearInterval(timeOutBtn.current);
       setDisableButton(false);
@@ -123,21 +144,22 @@ export const Step2_CheckUsername = ({ children }) => {
   const callback = () => {
     setEmailAndUsernameIsMatch(true);
     setLastClick(null);
-    console.log(response)
   };
 
-  const leftMinute = Math.floor(timer / 60)
-    .toString()
-    .padStart(2, 0);
-
-  const leftsecond = (timer % 60).toString().padStart(2, 0);
-
   return emailAndUsernameIsMatch ? (
-    <CheckUsernameContext.Provider value={{ email, username }}>{children}</CheckUsernameContext.Provider>
+    <CheckUsernameContext.Provider value={{ email, username }}>
+      {children}
+    </CheckUsernameContext.Provider>
   ) : (
     <Container>
       <form className={formStyles.form({})} onSubmit={submitButton}>
-        {showMessage && <Popup popup_props={popup_props} btnpopup_props={btnpopup_props} state_props={state_props} />}
+        {showMessage && (
+          <Popup
+            popup_props={popup_props}
+            btnpopup_props={btnpopup_props}
+            state_props={state_props}
+          />
+        )}
         <p>Step 2 - Insert Your Username</p>
         <p>Email: {email}</p>
         <Input
@@ -151,7 +173,11 @@ export const Step2_CheckUsername = ({ children }) => {
         />
         <Button
           type="submit"
-          label={disableButton ? `Click Again At ${leftMinute}:${leftsecond}` : "Confirm"}
+          label={
+            disableButton
+              ? `Click Again At ${leftTime.leftHour}:${leftTime.leftMinute}:${leftTime.leftsecond}`
+              : "Confirm"
+          }
           bgColor="blue"
           className="disabled:bg-gray-400"
           disabled={disableButton}

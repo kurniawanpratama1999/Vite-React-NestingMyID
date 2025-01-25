@@ -1,4 +1,5 @@
 export const fetcher = async ({ method, net, token = null, body = null }) => {
+  console.log("🔵 Dipakai untuk: ", net);
   const options = {};
   options.method = method;
   options.headers = { "Content-Type": "application/json" };
@@ -8,8 +9,12 @@ export const fetcher = async ({ method, net, token = null, body = null }) => {
 
   try {
     const fetching = await fetch(net, options);
-    return await fetching.json();
+    const res = await fetching.json();
+    console.log(`▶️▶️▶️ ${res.message} ◀️◀️◀️`)
+    console.log(net, ": Telah Selesai 🔴");
+    return res;
   } catch (error) {
+    console.log(net, ": Error ❌");
     return { success: false, message: `Server Error: Fetcher => ${error}` };
   }
 };
@@ -28,7 +33,12 @@ export const hit_api = async ({ method, net, body = null }) => {
   try {
     const get_token = await refresh_token();
     if (get_token.success) {
-      const fetching = await fetcher({ method, net, token: get_token.results, body });
+      const fetching = await fetcher({
+        method,
+        net,
+        token: get_token.results,
+        body,
+      });
       return fetching;
     } else {
       return get_token;

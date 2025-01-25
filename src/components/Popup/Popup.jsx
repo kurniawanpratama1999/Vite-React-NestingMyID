@@ -52,7 +52,12 @@ const Popup = ({ state_props, popup_props, btnpopup_props }) => {
   }, [lastClickBtnPopup, timeBtnBackPopup]);
   return (
     <>
-      <Wrapper position="fixed top-0 left-0" width="full" height="h-full" bgColor="bg-black/30 backdrop-blur-sm" />
+      <Wrapper
+        position="fixed top-0 left-0"
+        width="full"
+        height="h-full"
+        bgColor="bg-black/30 backdrop-blur-sm"
+      />
       <Wrapper
         position="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         display="grid grid-rows-[auto_1fr_auto] items-center"
@@ -67,9 +72,19 @@ const Popup = ({ state_props, popup_props, btnpopup_props }) => {
           </div>
         ) : (
           <>
-            <div className={popupStyles.wrapperHeading({ cMessage: response.success })}>
-              <h4 className={popupStyles.heading({ cMessage: response.success })}>
-                {response.success === null ? "Notification" : response.success ? "Success" : "Failed"}
+            <div
+              className={popupStyles.wrapperHeading({
+                cMessage: response.success,
+              })}
+            >
+              <h4
+                className={popupStyles.heading({ cMessage: response.success })}
+              >
+                {response.success === null
+                  ? "Notification"
+                  : response.success
+                  ? "Success"
+                  : "Failed"}
               </h4>
             </div>
             <p className={popupStyles.message}>{response.message}</p>

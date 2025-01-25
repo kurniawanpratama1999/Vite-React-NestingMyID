@@ -16,7 +16,6 @@ import { ProfileContext } from "../../contexts/Contexts";
 
 const Profile = () => {
   const profileContext = useContext(ProfileContext);
-  console.log(profileContext)
   return (
     <Container id="profile" className="grid">
       <Comp_Card
@@ -31,8 +30,18 @@ const Profile = () => {
         title="Username"
         desc={profileContext?.username || "Undefined"}
       />
-      <Comp_Card redirect="change-email" Icon={BiEnvelope} title="Email" desc={profileContext?.email || "Undefined"} />
-      <Comp_Card redirect="change-password" Icon={BiLock} title="Password" desc="********" />
+      <Comp_Card
+        redirect="change-email"
+        Icon={BiEnvelope}
+        title="Email"
+        desc={profileContext?.email || "Undefined"}
+      />
+      <Comp_Card
+        redirect="change-password"
+        Icon={BiLock}
+        title="Password"
+        desc="********"
+      />
       <Comp_Card
         redirect="request-activation"
         className={profileContext?.isVerify ? "green" : "red"}
