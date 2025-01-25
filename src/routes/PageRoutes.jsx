@@ -48,7 +48,7 @@ export const routeCollection = [
   { path: "Update", element: <CreateAndUpdate />, isAuth: true, isVerify: true },
   { path: "collection", element: <Collection />, isAuth: true, isVerify: false },
   { path: "collection/:link", element: <UrlCollection />, isAuth: true, isVerify: true },
-  { path: "email-verification/:email/:otp_encode", element: <VerifyEmailAuth />, isAuth: false, isVerify: false },
+  { path: "email-verification/:email/:username/:otp_encode", element: <VerifyEmailAuth />, isAuth: false, isVerify: false },
   { path: "verify-email-all", element: <VerifyEmailAll />, isAuth: false, isVerify: false },
   {
     path: "notification-after-register",
@@ -65,18 +65,10 @@ export const routeCollection = [
     path: "forget-password",
     element: (
       <Step1_InsertEmail>
-        <Step2_CheckUsername />
+        <Step2_CheckUsername>
+          <Nofitication_ForgetPassword />
+        </Step2_CheckUsername>
       </Step1_InsertEmail>
-    ),
-    isAuth: false,
-    isVerify: false,
-  },
-  {
-    path: "forget-password/notification",
-    element: (
-      <Step2_CheckUsername>
-        <Nofitication_ForgetPassword />
-      </Step2_CheckUsername>
     ),
     isAuth: false,
     isVerify: false,

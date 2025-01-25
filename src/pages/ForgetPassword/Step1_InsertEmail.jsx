@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
@@ -12,25 +12,35 @@ export const Step1_InsertEmail = ({ children }) => {
   const [email, setEmail] = useState("");
 
   // Message Settings;
-  const [message, setMessage] = useState("loading");
-  const [cMessage, setCMessage] = useState(null);
+  const [response, setResponse] = useState({ success: null, message: "loading" });
   const [showMessage, setShowMessage] = useState(false);
   const timeOutID = useRef(null);
 
   // Handle Close
-  const [timeBtnBackPopup, setTimeBtnBackPopup] = useState({ start: 10, repeat: 10 });
-  const [lastClickBtnPopup, setLastClickBtnPopup] = useState();
+  const REPEAT_TIME_BTN_POPUP = 10;
+  const [timeBtnBackPopup, setTimeBtnBackPopup] = useState(REPEAT_TIME_BTN_POPUP);
+  const [lastClickBtnPopup, setLastClickBtnPopup] = useState(null);
   const timeIntervalBtnPopup = useRef(null);
+
+  // Handle Submit
+  const REPEAT_TIMER = 5;
+  const [timer, setTimer] = useState(REPEAT_TIMER);
+  const [disbleButton, setDisableButton] = useState(false);
+  const [lastClick, setLastClick] = useState(null);
+  const timeOutBtn = useRef(null);
 
   // Close pop up
   const handleClose = () => {
     clearInterval(timeIntervalBtnPopup.current);
-    setTimeBtnBackPopup((prev) => ({ ...prev, start: prev.repeat }));
+
+    setTimeBtnBackPopup((prev) => REPEAT_TIME_BTN_POPUP);
+    setLastClickBtnPopup(null);
     setShowMessage(false);
   };
 
   // button props
   const btnpopup_props = {
+    REPEAT_TIME_BTN_POPUP,
     timeBtnBackPopup,
     setTimeBtnBackPopup,
     lastClickBtnPopup,
@@ -40,16 +50,14 @@ export const Step1_InsertEmail = ({ children }) => {
 
   // State_Props
   const state_props = {
-    setCMessage,
-    setMessage,
+    setResponse,
     setShowMessage,
     timeOutID,
   };
 
   // Popup Props
   const popup_props = {
-    cMessage,
-    message,
+    response,
     handleClose,
   };
 
@@ -59,17 +67,6 @@ export const Step1_InsertEmail = ({ children }) => {
     body: { email },
     method: "POST",
   };
-
-  // Call back if success
-  const callback = () => {
-    SetIsUserExist(true);
-  };
-
-  // Handle Submit
-  const [timer, setTimer] = useState({ start: 5, repeat: 5 });
-  const [disbleButton, setDisableButton] = useState(false);
-  const [lastClick, setLastClick] = useState(null);
-  const timeOutBtn = useRef(null);
 
   const submitButton = (e) => {
     e.preventDefault();
@@ -83,27 +80,54 @@ export const Step1_InsertEmail = ({ children }) => {
     setLastClick(newDate);
   };
 
+  useEffect(() => {
+    console.log(response)
+    setTimer(response?.time)
+  }, [response]);
+
+  // Clean up
+  useEffect(() => {
+    if (timer <= 1) {
+      clearInterval(timeOutBtn.current);
+      setDisableButton(false);
+      setLastClick(null);
+    }
+
+    return () => clearInterval(timeOutBtn.current);
+  }, [timer]);
+
   // EFFECT
   useEffect(() => {
     clearInterval(timeOutBtn.current);
     if (lastClick) {
       timeOutBtn.current = setInterval(() => {
-        setTimer((prev) => ({ ...prev, start: prev.start - 1 }));
-        if (timer.start <= 1) {
-          clearInterval(timeOutBtn.current);
-          setDisableButton(false);
-          setTimer((prev) => ({ ...prev, start: prev.repeat }));
-        }
+        setTimer((prev) => prev - 1);
       }, 1000);
+
+      if (timer <= 1) {
+        clearInterval(timeOutBtn.current);
+        setDisableButton(false);
+        setLastClick(null);
+      }
+    } else {
+      clearInterval(timeOutBtn.current);
+      setTimer(REPEAT_TIMER);
     }
     return () => clearInterval(timeOutBtn.current);
   }, [lastClick, timer]);
 
-  const leftMinute = Math.floor(timer.start / 60)
+  // Call back if success
+  const callback = () => {
+    SetIsUserExist(true);
+    setLastClick(null);
+    // handleClose();
+  };
+
+  const leftMinute = Math.floor(timer / 60)
     .toString()
     .padStart(2, 0);
 
-  const leftsecond = (timer.start % 60).toString().padStart(2, 0);
+  const leftsecond = (timer % 60).toString().padStart(2, 0);
 
   // ELEMENT
   return isUserExist ? (

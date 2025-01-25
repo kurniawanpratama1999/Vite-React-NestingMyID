@@ -4,23 +4,49 @@ import popupStyles from "./popup";
 import { useEffect } from "react";
 
 const Popup = ({ state_props, popup_props, btnpopup_props }) => {
-  const { message, cMessage, handleClose } = popup_props;
-  const { timeBtnBackPopup, timeIntervalBtnPopup, lastClickBtnPopup, setTimeBtnBackPopup } = btnpopup_props;
-  const { setMessage, setShowMessage } = state_props;
-  const isLoading = message.toString().includes("loading");
+  const { response, handleClose } = popup_props;
+  const {
+    REPEAT_TIME_BTN_POPUP,
+
+    timeBtnBackPopup,
+    setTimeBtnBackPopup,
+
+    lastClickBtnPopup,
+    setLastClickBtnPopup,
+
+    timeIntervalBtnPopup,
+  } = btnpopup_props;
+  const { setResponse, setShowMessage } = state_props;
+  const isLoading = response.message.toString().includes("loading");
+
+  useEffect(() => {
+    if (timeBtnBackPopup <= 1) {
+      setTimeBtnBackPopup(REPEAT_TIME_BTN_POPUP);
+      clearInterval(timeIntervalBtnPopup.current);
+      setShowMessage(false);
+      setResponse({ success: null, message: "loading" });
+      setLastClickBtnPopup(null);
+    }
+
+    return () => clearInterval(timeBtnBackPopup.current);
+  }, [timeBtnBackPopup]);
 
   useEffect(() => {
     clearInterval(timeIntervalBtnPopup.current);
     if (lastClickBtnPopup) {
       timeIntervalBtnPopup.current = setInterval(() => {
-        setTimeBtnBackPopup((prev) => ({ ...prev, start: prev.start - 1 }));
-        if (timeBtnBackPopup.start <= 1) {
-          setShowMessage(false);
-          setMessage("loading");
-          clearInterval(timeIntervalBtnPopup.current);
-          setTimeBtnBackPopup((prev) => ({ ...prev, start: prev.repeat }));
-        }
+        setTimeBtnBackPopup((prev) => prev - 1);
       }, 1000);
+
+      if (timeBtnBackPopup <= 1) {
+        clearInterval(timeIntervalBtnPopup.current);
+        setShowMessage(false);
+        setResponse({ success: null, message: "loading" });
+        setLastClickBtnPopup(null);
+      }
+    } else {
+      clearInterval(timeIntervalBtnPopup.current);
+      setTimeBtnBackPopup(REPEAT_TIME_BTN_POPUP);
     }
     return () => clearInterval(timeIntervalBtnPopup.current);
   }, [lastClickBtnPopup, timeBtnBackPopup]);
@@ -41,16 +67,16 @@ const Popup = ({ state_props, popup_props, btnpopup_props }) => {
           </div>
         ) : (
           <>
-            <div className={popupStyles.wrapperHeading({ cMessage })}>
-              <h4 className={popupStyles.heading({ cMessage })}>
-                {cMessage === null ? "Notification" : cMessage ? "Success" : "Failed"}
+            <div className={popupStyles.wrapperHeading({ cMessage: response.success })}>
+              <h4 className={popupStyles.heading({ cMessage: response.success })}>
+                {response.success === null ? "Notification" : response.success ? "Success" : "Failed"}
               </h4>
             </div>
-            <p className={popupStyles.message}>{message}</p>
+            <p className={popupStyles.message}>{response.message}</p>
             <Button
               onClick={handleClose}
               bgColor="bg-zinc-500 text-white"
-              label={`Kembali ${timeBtnBackPopup.start}`}
+              label={`Kembali ${timeBtnBackPopup}`}
               className={popupStyles.btnClose}
             />
           </>
