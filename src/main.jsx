@@ -3,13 +3,11 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 
 // LAYOUTS
-import Layouts from "./components/Layouts/Layouts";
+import { Layouts } from "@/Components";
 
 // MIDLEWARE
-import AuthPage from "./Middlewares/AuthMiddleware/AuthPage";
-import VerifyPage from "./Middlewares/VerifyMiddleware/VerifyPage";
-import { routeCollection } from "./routes/PageRoutes";
-import { AuthProvider } from "./contexts/Contexts";
+import routeCollection from "@/Routes";
+import { AuthMiddleware, VerifyMiddleware } from "@/Middlewares";
 
 // STYLES
 import "./index.css";
@@ -17,37 +15,24 @@ import "./index.css";
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
-      <Route
-        path="/"
-        element={
-          <AuthProvider>
-            <Layouts />
-          </AuthProvider>
-        }
-      >
+      <Route path="/" element={<Layouts />}>
         {routeCollection.map((route, index) => {
           const { isAuth, isVerify, path } = route;
           let element = route.element;
           if (isAuth && isVerify) {
             element = (
-              <AuthProvider>
-                <AuthPage>
-                  <VerifyPage>{element}</VerifyPage>
-                </AuthPage>
-              </AuthProvider>
+              <AuthMiddleware>
+                <VerifyMiddleware>{element}</VerifyMiddleware>
+              </AuthMiddleware>
             );
           }
 
           if (isAuth && !isVerify) {
-            element = (
-              <AuthProvider>
-                <AuthPage>{element}</AuthPage>
-              </AuthProvider>
-            );
+            element = <AuthMiddleware>{element}</AuthMiddleware>;
           }
 
           if (!isAuth && isVerify) {
-            element = <VerifyPage>{element}</VerifyPage>;
+            element = <VerifyMiddleware>{element}</VerifyMiddleware>;
           }
 
           return <Route key={index} path={path} element={element} />;
