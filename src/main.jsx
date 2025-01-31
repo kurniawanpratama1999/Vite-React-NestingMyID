@@ -1,3 +1,4 @@
+import "tailwindcss/tailwind.css";
 // DEPENDENCIES
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
@@ -8,9 +9,6 @@ import { Layouts } from "@/Components";
 // MIDLEWARE
 import routeCollection from "@/Routes";
 import { AuthMiddleware, VerifyMiddleware } from "@/Middlewares";
-
-// STYLES
-import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>

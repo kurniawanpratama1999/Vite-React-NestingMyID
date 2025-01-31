@@ -2,7 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { Popup } from "@/Components";
 import handleSubmit from "@/Utils/handleSubmit";
 
-const Form = ({ children, className = "", fetcher_props, form_props }) => {
+const Form = ({
+  children,
+  className = "",
+  isAuth = false,
+  fetcher_props,
+  form_props,
+}) => {
   const { setLeftTime, setDisableButton, callback } = form_props;
 
   // Message Settings;
@@ -59,6 +65,10 @@ const Form = ({ children, className = "", fetcher_props, form_props }) => {
     handleClose,
   };
 
+  useEffect(() => {
+    setTimer(response?.time || 10)
+  }, [response]);
+
   // Clean up
   useEffect(() => {
     setLeftTime((prev) => ({
@@ -109,7 +119,14 @@ const Form = ({ children, className = "", fetcher_props, form_props }) => {
     setDisableButton(true);
 
     // Execute
-    handleSubmit({ e, fetcher_props, state_props, btnpopup_props, callback });
+    handleSubmit({
+      e,
+      isAuth,
+      fetcher_props,
+      state_props,
+      btnpopup_props,
+      callback,
+    });
 
     // Lastclick
     setLastClick(newDate);

@@ -4,9 +4,8 @@ import { Outlet, useLocation } from "react-router";
 import { Helmet } from "react-helmet";
 
 // COMPONENTS
-import { HookContext } from "@/Contexts/CreateContext";
 import { Header } from "@/Components";
-import { AuthProvider } from "@/Contexts";
+import { AuthProvider, HookContext } from "@/Contexts";
 
 const LayoutsSetting = () => {
   const { isAuth } = useContext(HookContext);

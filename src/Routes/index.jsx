@@ -10,7 +10,7 @@ import {
 import {
   UrlCollection,
   CreateAndUpdate,
-  ProfileChangePassword,
+  CP_InsertPassword,
 } from "@/Pages/Auth_and_Verify";
 
 import {
@@ -19,7 +19,6 @@ import {
   Register,
   Login,
   ForgetPassword_InsertEmail,
-  ForgetPassword_CheckUsername,
   ForgetPassword_InsertNewPassword,
 } from "@/Pages/Global";
 
@@ -62,13 +61,7 @@ const GlobalPage = [
     isVerify: false,
   },
   {
-    path: "forget-password/insert-username",
-    element: <ForgetPassword_CheckUsername />,
-    isAuth: false,
-    isVerify: false,
-  },
-  {
-    path: "forget-password/new-password",
+    path: "forget-password/new-password/:email/:username/:otpCode",
     element: <ForgetPassword_InsertNewPassword />,
     isAuth: false,
     isVerify: false,
@@ -116,8 +109,8 @@ const AuthPage = [
 
 const AuthAndVerifyPage = [
   {
-    path: "profile/password",
-    element: <ProfileChangePassword />,
+    path: "profile/insert-password",
+    element: <CP_InsertPassword />,
     isAuth: true,
     isVerify: true,
   },

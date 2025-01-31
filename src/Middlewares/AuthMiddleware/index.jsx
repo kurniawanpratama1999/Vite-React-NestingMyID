@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { Navigate } from "react-router";
-import { HookContext } from "@/Contexts/CreateContext";
 import { Container } from "@/Components";
-import { AuthProvider } from "@/Contexts";
+import { AuthProvider, HookContext } from "@/Contexts";
 
 const AuthSetting = ({ children }) => {
   const { isAuth } = useContext(HookContext);

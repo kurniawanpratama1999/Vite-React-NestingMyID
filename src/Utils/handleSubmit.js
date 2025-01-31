@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { fetcher } from "./fetcher";
+import { fetcher, hit_api } from "./fetcher";
 
 // {getFetcher, }
 const handleSubmit = ({
   e,
+  isAuth = false,
   fetcher_props,
   state_props,
   btnpopup_props,
@@ -18,18 +18,33 @@ const handleSubmit = ({
   setShowMessage(true);
   setResponse({ success: null, message: "loading" });
   setLastClickBtnPopup(new Date());
-  fetcher({ method, net, body })
-    .then((res) => {
-      setResponse(res);
-      if (res.success) {
-        clearTimeout(timeOutID.current);
-        timeOutID.current = setTimeout(() => callback(), 2000);
-      }
-      return;
-    })
-    .catch((err) => {
-      setResponse({ success: null, message: `Error: ${err.message}` });
-    });
+  if (isAuth) {
+    hit_api({ method, net, body })
+      .then((res) => {
+        setResponse(res);
+        if (res.success) {
+          clearTimeout(timeOutID.current);
+          timeOutID.current = setTimeout(() => callback(), 2000);
+        }
+        return;
+      })
+      .catch((err) => {
+        setResponse({ success: null, message: `Error: ${err.message}` });
+      });
+  } else {
+    fetcher({ method, net, body })
+      .then((res) => {
+        setResponse(res);
+        if (res.success) {
+          clearTimeout(timeOutID.current);
+          timeOutID.current = setTimeout(() => callback(), 2000);
+        }
+        return;
+      })
+      .catch((err) => {
+        setResponse({ success: null, message: `Error: ${err.message}` });
+      });
+  }
 };
 
 export default handleSubmit;

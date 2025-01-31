@@ -1,2 +1,4 @@
 import { createContext } from "react";
-export const HookContext = createContext();
+const HookContext = createContext(null);
+
+export default HookContext;

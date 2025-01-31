@@ -1,29 +1,27 @@
-import { useEffect, useRef, useState } from "react";
-import { fetcher } from "@/Utils/fetcher";
-import { useNavigate, useParams } from "react-router";
-import { Container, Button, Input, Form } from "@/Components";
-import { Checkbox } from "@/Components/Input";
-import formStyles from "@/Components/Form/form";
+import { useParams } from "react-router";
 
-const InsertNewPassword = () => {
-  // state
-  const navigate = useNavigate();
+const CP_InsertNewPasswordSetting = () => {
   const { email, username, otpCode } = useParams();
 
+  // state
+  const [isCorrectPassword, setCorrectPassword] = useState(false);
   // Password Toggle show
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
-
   // Collect Data
-  const [sendData, setSendData] = useState({
-    newPassword: "",
-    confirmPassword: "",
-  });
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   // fetcher props
+  let endPoint = `${email}/${username}`;
+
+  if (otpCode) {
+    endPoint = endPoint = `/${otpCode}`;
+  }
+
   const fetcher_props = {
-    net: `http://localhost:3000/api/v1/auth/forget-password/new-password/${email}/${username}/${otpCode}`,
-    body: sendData,
+    net: `http://localhost:3000/api/v1/auth/change-password/${endPoint}`,
+    body: { newPassword, confirmPassword },
     method: "PUT",
   };
 
@@ -36,7 +34,7 @@ const InsertNewPassword = () => {
 
   // Toggle disable button after click
   const [disableButton, setDisableButton] = useState(false);
-  const callback = () => navigate("/login");
+  const callback = () => setIsUserExist(true);
 
   // form props
   const form_props = {
@@ -44,9 +42,10 @@ const InsertNewPassword = () => {
     setLeftTime,
     callback,
   };
-
   return (
     <Container>
+      <p>Email: {email}</p>
+      <p>Username: {username}</p>
       <Form
         className={formStyles.form({})}
         fetcher_props={fetcher_props}
@@ -54,33 +53,25 @@ const InsertNewPassword = () => {
       >
         <Input
           type={showPassword ? "text" : "password"}
-          htmlFor="new-password"
-          detail="New Password :"
+          htmlFor="password"
+          detail="Password :"
           focus="blue"
-          value={sendData.newPassword}
-          onChange={({ target }) =>
-            setSendData((prev) => ({
-              ...prev,
-              newPassword: target.value,
-            }))
-          }
-          required
+          value={newPassword}
+          onChange={({ target }) => setNewPassword(target.value)}
         />
         <Input
           type={showPassword ? "text" : "password"}
-          htmlFor="confirm-password"
-          detail="Confirm Password :"
+          htmlFor="password"
+          detail="Password :"
           focus="blue"
-          value={sendData.confirmPassword}
-          onChange={({ target }) =>
-            setSendData((prev) => ({
-              ...prev,
-              confirmPassword: target.value,
-            }))
-          }
-          required
+          value={confirmPassword}
+          onChange={({ target }) => setNewPassword(target.value)}
         />
-        <Checkbox htmlFor="show-password" onChange={handleShowPassword} />
+        <Checkbox
+          htmlFor="show-password"
+          label="show password"
+          onChange={handleShowPassword}
+        />
         <Button
           type="submit"
           label={
@@ -96,5 +87,6 @@ const InsertNewPassword = () => {
     </Container>
   );
 };
+const CP_InsertNewPassword = () => {};
 
-export default InsertNewPassword;
+export default CP_InsertNewPassword;

@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { HookContext } from "@/Contexts/CreateContext";
 import { Container } from "@/Components";
 import { ProfileProvider } from "@/Contexts";
+import { HookContext } from "@/Contexts";
 
 const VerifySetting = ({ children }) => {
-  const { is_verify } = useContext(HookContext);
-  return is_verify ? (
+  const { isVerify } = useContext(HookContext);
+  return isVerify ? (
     children
   ) : (
     <Container className="flex jc-center ai-center">

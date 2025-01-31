@@ -1,4 +1,3 @@
-import React from "react";
 import { Container, Input, Button } from "@/Components";
 import { Checkbox } from "@/Components/Input";
 import formStyles from "@/Components/Form/form";

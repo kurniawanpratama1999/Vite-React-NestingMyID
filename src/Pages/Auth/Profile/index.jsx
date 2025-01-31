@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Container } from "@/Components";
 import {
   BiCalendarEdit,
@@ -12,8 +12,7 @@ import {
 } from "react-icons/bi";
 
 import Comp_Card from "./Card";
-import { HookContext } from "@/Contexts/CreateContext";
-import { ProfileProvider } from "@/Contexts";
+import { ProfileProvider, HookContext } from "@/Contexts";
 
 const ProfileSetting = () => {
   const profileContext = useContext(HookContext);
@@ -38,7 +37,7 @@ const ProfileSetting = () => {
         desc={profileContext?.email || "Undefined"}
       />
       <Comp_Card
-        redirect="change-password"
+        redirect="insert-password"
         Icon={BiLock}
         title="Password"
         desc="********"
