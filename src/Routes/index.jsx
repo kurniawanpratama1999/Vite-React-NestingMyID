@@ -4,13 +4,17 @@ import {
   Profile,
   ProfileChangeDisplayName,
   ProfileChangeUsername,
-  ProfileChangeEmail,
+  CE_InsertNewEmail,
+  CE_InsertPassword,
+  RequestVerifyEmail,
+  VerifyLink,
 } from "@/Pages/Auth";
 
 import {
   UrlCollection,
   CreateAndUpdate,
   CP_InsertPassword,
+  CP_InsertNewPassword,
 } from "@/Pages/Auth_and_Verify";
 
 import {
@@ -25,7 +29,6 @@ import {
 import {
   AfterRegister,
   ForgetPassword,
-  RequestActivation,
   VerifyEmail,
 } from "@/Pages/Notification";
 
@@ -72,7 +75,7 @@ const AuthPage = [
   {
     path: "logout",
     element: <Logout />,
-    isAuth: true,
+    isAuth: false,
     isVerify: false,
   },
   {
@@ -89,13 +92,25 @@ const AuthPage = [
   },
   {
     path: "profile/email",
-    element: <ProfileChangeEmail />,
+    element: <CE_InsertPassword />,
+    isAuth: true,
+    isVerify: false,
+  },
+  {
+    path: "profile/email/:email/:username/:otpCode?",
+    element: <CE_InsertNewEmail />,
     isAuth: true,
     isVerify: false,
   },
   {
     path: "profile/username",
     element: <ProfileChangeUsername />,
+    isAuth: true,
+    isVerify: false,
+  },
+  {
+    path: "profile/verify-email",
+    element: <RequestVerifyEmail />,
     isAuth: true,
     isVerify: false,
   },
@@ -109,8 +124,14 @@ const AuthPage = [
 
 const AuthAndVerifyPage = [
   {
-    path: "profile/insert-password",
+    path: "profile/password",
     element: <CP_InsertPassword />,
+    isAuth: true,
+    isVerify: true,
+  },
+  {
+    path: "profile/password/:email/:username/:otpCode",
+    element: <CP_InsertNewPassword />,
     isAuth: true,
     isVerify: true,
   },
@@ -147,17 +168,20 @@ const NotifPage = [
     isAuth: false,
     isVerify: false,
   },
+];
+
+const VerifyPage = [
   {
-    path: "notif/req-activation",
-    element: <RequestActivation />,
+    path: "verify/register/:email/:username/:otpCode",
+    element: <VerifyEmail />, // after register
     isAuth: true,
     isVerify: false,
   },
   {
-    path: "notif/verify-email",
-    element: <VerifyEmail />,
+    path: "verify/verify-email/:email/:username/:otpCode",
+    element: <VerifyLink />, // after Click Request Verify Email
     isAuth: true,
-    isVerify: true,
+    isVerify: false,
   },
 ];
 
@@ -166,6 +190,7 @@ const routeCollection = [
   ...AuthPage,
   ...AuthAndVerifyPage,
   ...NotifPage,
+  ...VerifyPage,
 ];
 
 export default routeCollection;

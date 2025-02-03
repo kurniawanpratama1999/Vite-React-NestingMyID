@@ -1,6 +1,9 @@
 export { default as LinkCollection } from "./LinkCollection";
 export { default as Logout } from "./Logout";
 export { default as Profile } from "./Profile";
-export { default as ProfileChangeEmail } from "./Profile/ChangeEmail";
+export { default as CE_InsertPassword } from "./Profile/ChangeEmail/InsertPassword";
+export { default as CE_InsertNewEmail } from "./Profile/ChangeEmail/InsertNewEmail";
 export { default as ProfileChangeUsername } from "./Profile/ChangeUsername";
 export { default as ProfileChangeDisplayName } from "./Profile/ChangeName";
+export { default as RequestVerifyEmail } from "./Profile/RequestVerifyEmail/UserRequest";
+export { default as VerifyLink } from "./Profile/RequestVerifyEmail/VerifyLink";

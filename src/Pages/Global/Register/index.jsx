@@ -56,7 +56,7 @@ const Register = () => {
         form_props={form_props}
       >
         <h3 className="text-center text-xl desktop:col-span-2">
-          Cukup Satu Tautan
+          Register Account
         </h3>
 
         <Input

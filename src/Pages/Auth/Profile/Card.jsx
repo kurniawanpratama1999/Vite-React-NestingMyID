@@ -6,6 +6,7 @@ const Comp_Card = ({
   Icon,
   className = "green",
   redirect = null,
+  ...props
 }) => {
   return redirect ? (
     <NavLink to={redirect} className="card-wrapper">
@@ -16,7 +17,7 @@ const Comp_Card = ({
       <p>{desc}</p>
     </NavLink>
   ) : (
-    <div className="card-wrapper">
+    <div className="card-wrapper" {...props}>
       <div className={`icon-wrapper ${className}`.trim()}>
         <Icon className="icon" />
       </div>

@@ -9,7 +9,7 @@ const Logout = () => {
 
   useEffect(() => {
     const method = "DELETE";
-    const net = "http://localhost:3000/api/v1/user/logout";
+    const net = "http://localhost:3000/api/v1/auth/logout";
     fetcher({ method, net })
       .then((res) => {
         setMessage(res.message);

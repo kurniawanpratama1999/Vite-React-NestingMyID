@@ -1,10 +1,12 @@
-import { useParams } from "react-router";
+import { Button, Container, Form, Input } from "@/Components";
+import { Checkbox } from "@/Components/Input";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router";
 
-const CP_InsertNewPasswordSetting = () => {
+const CP_InsertNewPassword = () => {
+  const navigate = useNavigate();
   const { email, username, otpCode } = useParams();
 
-  // state
-  const [isCorrectPassword, setCorrectPassword] = useState(false);
   // Password Toggle show
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
@@ -13,11 +15,7 @@ const CP_InsertNewPasswordSetting = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   // fetcher props
-  let endPoint = `${email}/${username}`;
-
-  if (otpCode) {
-    endPoint = endPoint = `/${otpCode}`;
-  }
+  const endPoint = `${email}/${username}/${otpCode}`;
 
   const fetcher_props = {
     net: `http://localhost:3000/api/v1/auth/change-password/${endPoint}`,
@@ -34,7 +32,7 @@ const CP_InsertNewPasswordSetting = () => {
 
   // Toggle disable button after click
   const [disableButton, setDisableButton] = useState(false);
-  const callback = () => setIsUserExist(true);
+  const callback = () => navigate("/logout");
 
   // form props
   const form_props = {
@@ -51,6 +49,7 @@ const CP_InsertNewPasswordSetting = () => {
         fetcher_props={fetcher_props}
         form_props={form_props}
       >
+        <h3 className="text-center text-xl">Change Password</h3>
         <Input
           type={showPassword ? "text" : "password"}
           htmlFor="password"
@@ -65,7 +64,7 @@ const CP_InsertNewPasswordSetting = () => {
           detail="Password :"
           focus="blue"
           value={confirmPassword}
-          onChange={({ target }) => setNewPassword(target.value)}
+          onChange={({ target }) => setConfirmPassword(target.value)}
         />
         <Checkbox
           htmlFor="show-password"
@@ -87,6 +86,5 @@ const CP_InsertNewPasswordSetting = () => {
     </Container>
   );
 };
-const CP_InsertNewPassword = () => {};
 
 export default CP_InsertNewPassword;

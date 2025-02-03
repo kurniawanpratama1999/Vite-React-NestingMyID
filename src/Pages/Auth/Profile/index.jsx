@@ -31,19 +31,19 @@ const ProfileSetting = () => {
         desc={profileContext?.username || "Undefined"}
       />
       <Comp_Card
-        redirect="change-email"
+        redirect="/profile/email"
         Icon={BiEnvelope}
         title="Email"
         desc={profileContext?.email || "Undefined"}
       />
       <Comp_Card
-        redirect="insert-password"
+        redirect="/profile/password"
         Icon={BiLock}
         title="Password"
         desc="********"
       />
       <Comp_Card
-        redirect="request-activation"
+        redirect={profileContext?.isVerify ? null : "/profile/verify-email"}
         className={profileContext?.isVerify ? "green" : "red"}
         Icon={profileContext?.isVerify ? BiUserCheck : BiUserX}
         title="Verify Account"

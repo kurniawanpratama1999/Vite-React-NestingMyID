@@ -6,6 +6,7 @@ const ChangeUsername = () => {
   return (
     <Container>
       <form className={formStyles.form({})}>
+        <h3 className="text-center text-xl">Change Username</h3>
         <Input htmlFor="new_username" detail="New Username :" focus="blue" />
         <Input
           type="password"

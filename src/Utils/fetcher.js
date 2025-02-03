@@ -10,7 +10,7 @@ export const fetcher = async ({ method, net, token = null, body = null }) => {
   try {
     const fetching = await fetch(net, options);
     const res = await fetching.json();
-    console.log(`▶️▶️▶️ ${res.message} ◀️◀️◀️`)
+    console.log(`▶️▶️▶️ ${res.message} ◀️◀️◀️`);
     console.log(net, ": Telah Selesai 🔴");
     return res;
   } catch (error) {

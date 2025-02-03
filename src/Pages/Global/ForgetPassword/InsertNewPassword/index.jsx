@@ -52,6 +52,7 @@ const InsertNewPassword = () => {
         fetcher_props={fetcher_props}
         form_props={form_props}
       >
+        <h3 className="text-center text-xl">Forget Password</h3>
         <Input
           type={showPassword ? "text" : "password"}
           htmlFor="new-password"

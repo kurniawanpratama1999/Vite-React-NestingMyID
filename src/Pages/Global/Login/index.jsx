@@ -52,7 +52,7 @@ const Login = () => {
         fetcher_props={fetcher_props}
         form_props={form_props}
       >
-        <h3 className="text-center text-xl">Cukup Satu Tautan</h3>
+        <h3 className="text-center text-xl">Login Account</h3>
         <Input
           type="text"
           htmlFor="username"

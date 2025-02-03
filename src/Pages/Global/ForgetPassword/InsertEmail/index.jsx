@@ -49,10 +49,13 @@ const InsertEmailSetting = ({ children }) => {
         fetcher_props={fetcher_props}
         form_props={form_props}
       >
+        <h3 className="text-center text-xl">
+          Forget Password
+        </h3>
         <Input
           type="email"
           htmlFor="email"
-          detail="Email :"
+          detail="Insert Email :"
           focus="blue"
           value={email}
           onChange={({ target }) => setEmail(target.value)}
@@ -61,7 +64,7 @@ const InsertEmailSetting = ({ children }) => {
         <Input
           type="text"
           htmlFor="username"
-          detail="Username :"
+          detail="Insert Username :"
           focus="blue"
           value={username}
           onChange={({ target }) => setUsername(target.value)}
